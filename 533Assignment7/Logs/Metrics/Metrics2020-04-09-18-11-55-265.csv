@@ -1,0 +1,4 @@
+Id,Prediction,Date,File,StartTime,ElapsedTime,BusyTime,Commands,editOrInsertPercentage,debugPercentage,navigationPercentage,focusPercentage,removePercentage,editPercentage,COMMAND_RATE,NAVIGATION_RATE,DEBUG_RATE,FOCUS_RATE,EDIT_RATE,REMOVE_RATE,INSERT_RATE,webLinkTimes,Web Page Visits
+1,,Thu Apr 09 18:14:04 EDT 2020,ClientProcess.java,1586470444376,73479,0,(I)2(D)2(F)6,0.2,20.0,0.0,60.0,0.0,0.0,0.136986301369863,0.0,0.0273972602739726,0.0821917808219178,0.0,0.0,0.0273972602739726,1.0,[1586470493090 101 UNC-Chapel Hill Single Sign-On https://sakai.unc.edu/Shibboleth.sso/Logout?return=https://sso.unc.edu/idp/logout.jsp]
+,/modelData/A0UserStudy2010.arff,Thu Apr 09 18:14:04 EDT 2020,ClientProcess.java, 1586470444376
+2,,Thu Apr 09 18:15:26 EDT 2020,ClientProcess.java,1586470526462,48074,0,(F)2,0.0,0.0,0.0,100.0,0.0,0.0,0.041666666666666664,0.0,0.0,0.041666666666666664,0.0,0.0,0.0,0.0,[]

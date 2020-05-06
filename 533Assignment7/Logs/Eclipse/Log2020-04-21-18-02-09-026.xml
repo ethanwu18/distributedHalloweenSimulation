@@ -1,0 +1,289 @@
+<Events startTimestamp="1587506529026" logVersion="1.0.0.202001201631">
+  <Command __id="9" _type="MoveCaretCommand" caretOffset="0" date="Tue Apr 21 18:05:31 EDT 2020" docOffset="0" starttimestamp="1587506529026" timestamp="202610" />
+  <Command __id="10" _type="ShellCommand" date="Tue Apr 21 18:06:05 EDT 2020" starttimestamp="1587506529026" timestamp="236778" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="8" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 18:05:31 EDT 2020" docASTNodeCount="30" docActiveCodeLength="266" docExpressionCount="22" docLength="266" projectName="533A6" starttimestamp="1587506529026" timestamp="202510">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\NIOManagerPrintServer.java]]></filePath>
+    <diff><![CDATA[null]]></diff>
+    <snapshot><![CDATA[package print;
+
+import inputport.nio.manager.listeners.SocketChannelAcceptListener;
+import inputport.nio.manager.listeners.SocketChannelReadListener;
+
+public interface NIOManagerPrintServer extends SocketChannelAcceptListener, SocketChannelReadListener {
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="12" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 19:05:23 EDT 2020" docASTNodeCount="35" docActiveCodeLength="264" docExpressionCount="20" docLength="264" projectName="533A6" starttimestamp="1587506529026" timestamp="3794277">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\NIOManagerPrintClientLauncher.java]]></filePath>
+    <diff><![CDATA[null]]></diff>
+    <snapshot><![CDATA[package print;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+
+public class NIOManagerPrintClientLauncher {
+	public static void main(String[] args) {
+		new AnNIOManagerPrintClient(ClientArgsProcessor.getNIOServerPort(args)).processInput();
+	}
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="11" _type="ShellCommand" date="Tue Apr 21 19:05:23 EDT 2020" starttimestamp="1587506529026" timestamp="3794141" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="13" _type="MoveCaretCommand" caretOffset="13" date="Tue Apr 21 19:05:23 EDT 2020" docOffset="13" starttimestamp="1587506529026" timestamp="3794344" />
+  <Command __id="15" _type="MoveCaretCommand" caretOffset="629" date="Tue Apr 21 19:05:24 EDT 2020" docOffset="1562" starttimestamp="1587506529026" timestamp="3795696" />
+  <Command __id="16" _type="ShellCommand" date="Tue Apr 21 19:06:04 EDT 2020" starttimestamp="1587506529026" timestamp="3835117" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="17" _type="ShellCommand" date="Tue Apr 21 21:11:10 EDT 2020" starttimestamp="1587506529026" timestamp="11341818" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="18" _type="MoveCaretCommand" caretOffset="1085" date="Tue Apr 21 21:11:10 EDT 2020" docOffset="2018" starttimestamp="1587506529026" timestamp="11341834" />
+  <Command __id="19" _type="SelectTextCommand" caretOffset="1098" date="Tue Apr 21 21:11:11 EDT 2020" end="1098" start="1077" starttimestamp="1587506529026" timestamp="11342045" />
+  <Command __id="20" _type="MoveCaretCommand" caretOffset="938" date="Tue Apr 21 21:11:15 EDT 2020" docOffset="1871" starttimestamp="1587506529026" timestamp="11346597" />
+  <Command __id="21" _type="SelectTextCommand" caretOffset="955" date="Tue Apr 21 21:11:15 EDT 2020" end="955" start="932" starttimestamp="1587506529026" timestamp="11346796" />
+  <Command __id="22" _type="MoveCaretCommand" caretOffset="925" date="Tue Apr 21 21:11:16 EDT 2020" docOffset="1858" starttimestamp="1587506529026" timestamp="11347844" />
+  <Command __id="23" _type="SelectTextCommand" caretOffset="931" date="Tue Apr 21 21:11:17 EDT 2020" end="931" start="921" starttimestamp="1587506529026" timestamp="11348076" />
+  <Command __id="24" _type="ShellCommand" date="Tue Apr 21 21:11:26 EDT 2020" starttimestamp="1587506529026" timestamp="11357407" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="25" _type="ShellCommand" date="Tue Apr 21 21:13:18 EDT 2020" starttimestamp="1587506529026" timestamp="11469338" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="26" _type="ShellCommand" date="Tue Apr 21 21:13:25 EDT 2020" starttimestamp="1587506529026" timestamp="11476858" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="14" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 19:05:24 EDT 2020" docASTNodeCount="345" docActiveCodeLength="2450" docExpressionCount="251" docLength="2450" projectName="533A6" starttimestamp="1587506529026" timestamp="3795631">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\AnNIOManagerPrintServer.java]]></filePath>
+    <diff><![CDATA[null]]></diff>
+    <snapshot><![CDATA[package print;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+
+
+import inputport.nio.manager.NIOManager;
+import inputport.nio.manager.NIOManagerFactory;
+import inputport.nio.manager.factories.classes.AReadingAcceptCommandFactory;
+import inputport.nio.manager.factories.classes.AnAcceptCommandFactory;
+import inputport.nio.manager.factories.selectors.AcceptCommandFactorySelector;
+import inputport.nio.manager.listeners.SocketChannelAcceptListener;
+import inputport.nio.manager.listeners.SocketChannelReadListener;
+import inputport.nio.manager.listeners.SocketChannelWriteListener;
+import inputport.nio.manager.listeners.WriteBoundedBufferListener;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.nio.SocketChannelBound;
+
+public class AnNIOManagerPrintServer implements NIOManagerPrintServer {
+	protected NIOManager nioManager = NIOManagerFactory.getSingleton();
+	public AnNIOManagerPrintServer(int aServerPort) {
+		setTracing();
+		setFactories();
+		initialize(aServerPort);
+	}
+	protected void setFactories() {
+		AcceptCommandFactorySelector.setFactory(new AnAcceptCommandFactory(SelectionKey.OP_READ));
+	}
+	protected void setTracing() {
+		FactoryTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+	}
+	protected void initialize(int aServerPort) {
+		try {
+			ServerSocketChannel aServerFactoryChannel = ServerSocketChannel.open();
+			InetSocketAddress anInternetSocketAddress = new InetSocketAddress(aServerPort);
+			aServerFactoryChannel.socket().bind(anInternetSocketAddress);
+			SocketChannelBound.newCase(this, aServerFactoryChannel, anInternetSocketAddress);
+			nioManager.enableListenableAccepts(aServerFactoryChannel, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
+	@Override
+	public void socketChannelAccepted(ServerSocketChannel aServerSocketChannel, SocketChannel aSocketChannel) {
+		nioManager.addReadListener(aSocketChannel, this);
+		
+	}
+	@Override
+	public void socketChannelRead(SocketChannel aSocketChannel, ByteBuffer aMessage, int aLength) {
+		String aMessageString = new String(aMessage.array(), aMessage.position(),
+				aLength);
+		System.out.println(aMessageString + "<--" + aSocketChannel);
+		
+	}
+	
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="28" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:47:16 EDT 2020" docASTNodeCount="3" docActiveCodeLength="18" docExpressionCount="1" docLength="206" projectName="533A6" starttimestamp="1587506529026" timestamp="17107654">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\package-info.java]]></filePath>
+    <diff><![CDATA[null]]></diff>
+    <snapshot><![CDATA[/**
+ * Run NIOManagerPrintServerLauncher
+ * Run one or more times, NIOClientLauncher
+ * Provide input to each client and view the output at the server
+ */
+/**
+ * @author dewan
+ *
+ */
+package print;]]></snapshot>
+  </Command>
+  <Command __id="30" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:47:46 EDT 2020" docASTNodeCount="64" docActiveCodeLength="445" docExpressionCount="44" docLength="479" projectName="533A6" starttimestamp="1587506529026" timestamp="17137244">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\comp533\RunS20A6Tests.java]]></filePath>
+    <diff><![CDATA[null]]></diff>
+    <snapshot><![CDATA[package comp533;
+
+import gradingTools.comp533s20.assignment5.Assignment5Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+import util.trace.Tracer;
+
+public class RunS20A6Tests {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Tracer.showInfo(true);
+		GraderBasicsTraceUtility.setBufferTracedMessages(false);
+		Assignment5Suite.setProcessTimeOut(5);
+		Tracer.setMaxTraces(8000);
+		Assignment5Suite.main(args);
+	}
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="32" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:47:48 EDT 2020" docASTNodeCount="397" docActiveCodeLength="2662" docExpressionCount="280" docLength="2707" projectName="533A6" starttimestamp="1587506529026" timestamp="17139661">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\AnNIOManagerPrintClient.java]]></filePath>
+    <diff><![CDATA[null]]></diff>
+    <snapshot><![CDATA[package print;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.Scanner;
+
+import inputport.nio.manager.NIOManager;
+import inputport.nio.manager.NIOManagerFactory;
+import inputport.nio.manager.factories.classes.AConnectCommandFactory;
+import inputport.nio.manager.factories.classes.AReadingAcceptCommandFactory;
+import inputport.nio.manager.factories.classes.AReadingWritingConnectCommandFactory;
+import inputport.nio.manager.factories.selectors.AcceptCommandFactorySelector;
+import inputport.nio.manager.factories.selectors.ConnectCommandFactorySelector;
+import inputport.nio.manager.listeners.SocketChannelConnectListener;
+import inputport.nio.manager.listeners.SocketChannelReadListener;
+import inputport.nio.manager.listeners.SocketChannelWriteListener;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.nio.SocketChannelBound;
+
+public class AnNIOManagerPrintClient implements SocketChannelConnectListener, SocketChannelWriteListener {
+	protected NIOManager nioManager = NIOManagerFactory.getSingleton();
+	protected SocketChannel socketChannel;
+	protected Scanner scanner = new Scanner(System.in);
+
+	protected AnNIOManagerPrintClient(int aServerPort) {
+		setTracing();
+		setFactories();
+		initialize(aServerPort);
+	}
+	protected void setFactories() {		
+		ConnectCommandFactorySelector.setFactory(new AConnectCommandFactory(0));
+	}
+	public void processInput() {
+		scanner = new Scanner(System.in);
+		while (true) {
+			System.out.println("Enter a line of input to be printed remotely");
+		String aNextLine = scanner.nextLine();
+		//wrap writes to the buffer and then flips it
+		ByteBuffer aWriteMessage = ByteBuffer.wrap(aNextLine.getBytes()); 
+		
+		nioManager.write(socketChannel, aWriteMessage, this);
+		}
+		
+	}
+	protected void setTracing() {
+		FactoryTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+	}
+	protected void initialize(int aServerPort) {
+		try {
+			socketChannel = SocketChannel.open();
+			InetAddress aServerAddress = InetAddress.getByName("localhost");
+			nioManager.connect(socketChannel, aServerAddress, aServerPort, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	@Override
+	public void connected(SocketChannel aSocketChannel) {
+	
+	}
+	@Override
+	public void notConnected(SocketChannel theSocketChannel, Exception e) {
+		
+	}
+	@Override
+	public void written(SocketChannel socketChannel, ByteBuffer theWriteBuffer, int sendId) {
+		
+	}
+
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="34" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:47:51 EDT 2020" docASTNodeCount="345" docActiveCodeLength="2450" docExpressionCount="251" docLength="2450" projectName="533A6" starttimestamp="1587506529026" timestamp="17142078">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\AnNIOManagerPrintServer.java]]></filePath>
+    <diff><![CDATA[[Diff(EQUAL,"package print;¶¶import java.io.IOException;¶import java.net.InetSocketAddress;¶import java.nio.ByteBuffer;¶import java.nio.channels.SelectionKey;¶import java.nio.channels.ServerSocketChannel;¶import java.nio.channels.SocketChannel;¶¶¶import inputport.nio.manager.NIOManager;¶import inputport.nio.manager.NIOManagerFactory;¶import inputport.nio.manager.factories.classes.AReadingAcceptCommandFactory;¶import inputport.nio.manager.factories.classes.AnAcceptCommandFactory;¶import inputport.nio.manager.factories.selectors.AcceptCommandFactorySelector;¶import inputport.nio.manager.listeners.SocketChannelAcceptListener;¶import inputport.nio.manager.listeners.SocketChannelReadListener;¶import inputport.nio.manager.listeners.SocketChannelWriteListener;¶import inputport.nio.manager.listeners.WriteBoundedBufferListener;¶import util.trace.factories.FactoryTraceUtility;¶import util.trace.port.nio.NIOTraceUtility;¶import util.trace.port.nio.SocketChannelBound;¶¶public class AnNIOManagerPrintServer implements NIOManagerPrintServer {¶	protected NIOManager nioManager = NIOManagerFactory.getSingleton();¶	public AnNIOManagerPrintServer(int aServerPort) {¶		setTracing();¶		setFactories();¶		initialize(aServerPort);¶	}¶	protected void setFactories() {¶		AcceptCommandFactorySelector.setFactory(new AnAcceptCommandFactory(SelectionKey.OP_READ));¶	}¶	protected void setTracing() {¶		FactoryTraceUtility.setTracing();¶		NIOTraceUtility.setTracing();¶	}¶	protected void initialize(int aServerPort) {¶		try {¶			ServerSocketChannel aServerFactoryChannel = ServerSocketChannel.open();¶			InetSocketAddress anInternetSocketAddress = new InetSocketAddress(aServerPort);¶			aServerFactoryChannel.socket().bind(anInternetSocketAddress);¶			SocketChannelBound.newCase(this, aServerFactoryChannel, anInternetSocketAddress);¶			nioManager.enableListenableAccepts(aServerFactoryChannel, this);¶		} catch (IOException e) {¶			e.printStackTrace();¶		}		¶	}¶	@Override¶	public void socketChannelAccepted(ServerSocketChannel aServerSocketChannel, SocketChannel aSocketChannel) {¶		nioManager.addReadListener(aSocketChannel, this);¶		¶	}¶	@Override¶	public void socketChannelRead(SocketChannel aSocketChannel, ByteBuffer aMessage, int aLength) {¶		String aMessageString = new String(aMessage.array(), aMessage.position(),¶				aLength);¶		System.out.println(aMessageString + "<--" + aSocketChannel);¶		¶	}¶	¶¶}¶")]]]></diff>
+  </Command>
+  <Command __id="36" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:47:55 EDT 2020" docASTNodeCount="3" docActiveCodeLength="18" docExpressionCount="1" docLength="206" projectName="533A6" starttimestamp="1587506529026" timestamp="17146533">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\package-info.java]]></filePath>
+    <diff><![CDATA[[Diff(EQUAL,"/**¶ * Run NIOManagerPrintServerLauncher¶ * Run one or more times, NIOClientLauncher¶ * Provide input to each client and view the output at the server¶ */¶/**¶ * @author dewan¶ *¶ */¶package print;")]]]></diff>
+  </Command>
+  <Command __id="38" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:47:59 EDT 2020" docASTNodeCount="33" docActiveCodeLength="249" docExpressionCount="18" docLength="249" projectName="533A6" starttimestamp="1587506529026" timestamp="17150259">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\NIOManagerPrintServerLauncher.java]]></filePath>
+    <diff><![CDATA[null]]></diff>
+    <snapshot><![CDATA[package print;
+
+import assignments.util.mainArgs.ServerArgsProcessor;
+
+public class NIOManagerPrintServerLauncher {
+	public static void main(String[] args) {
+		new AnNIOManagerPrintServer(ServerArgsProcessor.getNIOServerPort(args));
+	}
+
+}
+]]></snapshot>
+  </Command>
+  <Command __id="40" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:48:15 EDT 2020" docASTNodeCount="30" docActiveCodeLength="266" docExpressionCount="22" docLength="266" projectName="533A6" starttimestamp="1587506529026" timestamp="17166946">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\NIOManagerPrintServer.java]]></filePath>
+    <diff><![CDATA[[Diff(EQUAL,"package print;¶¶import inputport.nio.manager.listeners.SocketChannelAcceptListener;¶import inputport.nio.manager.listeners.SocketChannelReadListener;¶¶public interface NIOManagerPrintServer extends SocketChannelAcceptListener, SocketChannelReadListener {¶¶}¶")]]]></diff>
+  </Command>
+  <Command __id="42" _type="DiffBasedFileOpenCommand" date="Tue Apr 21 22:48:22 EDT 2020" docASTNodeCount="33" docActiveCodeLength="249" docExpressionCount="18" docLength="249" projectName="533A6" starttimestamp="1587506529026" timestamp="17173828">
+    <filePath><![CDATA[C:\Users\ehwu\eclipse-workspace\533A6\src\print\NIOManagerPrintServerLauncher.java]]></filePath>
+    <diff><![CDATA[[Diff(EQUAL,"package print;¶¶import assignments.util.mainArgs.ServerArgsProcessor;¶¶public class NIOManagerPrintServerLauncher {¶	public static void main(String[] args) {¶		new AnNIOManagerPrintServer(ServerArgsProcessor.getNIOServerPort(args));¶	}¶¶}¶")]]]></diff>
+  </Command>
+  <Command __id="27" _type="ShellCommand" date="Tue Apr 21 22:47:16 EDT 2020" starttimestamp="1587506529026" timestamp="17107316" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="29" _type="MoveCaretCommand" caretOffset="0" date="Tue Apr 21 22:47:16 EDT 2020" docOffset="0" starttimestamp="1587506529026" timestamp="17107769" />
+  <Command __id="31" _type="MoveCaretCommand" caretOffset="354" date="Tue Apr 21 22:47:46 EDT 2020" docOffset="435" starttimestamp="1587506529026" timestamp="17137355" />
+  <Command __id="33" _type="MoveCaretCommand" caretOffset="8" date="Tue Apr 21 22:47:48 EDT 2020" docOffset="8" starttimestamp="1587506529026" timestamp="17139727" />
+  <Command __id="35" _type="SelectTextCommand" caretOffset="1864" date="Tue Apr 21 22:47:51 EDT 2020" end="1864" start="1854" starttimestamp="1587506529026" timestamp="17142146" />
+  <Command __id="37" _type="MoveCaretCommand" caretOffset="0" date="Tue Apr 21 22:47:55 EDT 2020" docOffset="0" starttimestamp="1587506529026" timestamp="17146573" />
+  <Command __id="39" _type="MoveCaretCommand" caretOffset="0" date="Tue Apr 21 22:47:59 EDT 2020" docOffset="0" starttimestamp="1587506529026" timestamp="17150305" />
+  <Command __id="41" _type="MoveCaretCommand" caretOffset="0" date="Tue Apr 21 22:48:16 EDT 2020" docOffset="0" starttimestamp="1587506529026" timestamp="17167016" />
+  <Command __id="43" _type="MoveCaretCommand" caretOffset="0" date="Tue Apr 21 22:48:22 EDT 2020" docOffset="0" starttimestamp="1587506529026" timestamp="17173891" />
+  <Command __id="45" _type="SelectTextCommand" caretOffset="1864" date="Tue Apr 21 22:48:24 EDT 2020" end="1864" start="1854" starttimestamp="1587506529026" timestamp="17175468" />
+  <Command __id="46" _type="ShellCommand" date="Tue Apr 21 22:52:11 EDT 2020" starttimestamp="1587506529026" timestamp="17402085" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="47" _type="ShellCommand" date="Tue Apr 21 23:23:56 EDT 2020" starttimestamp="1587506529026" timestamp="19307233" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="48" _type="ShellCommand" date="Tue Apr 21 23:24:07 EDT 2020" starttimestamp="1587506529026" timestamp="19318756" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="49" _type="ShellCommand" date="Tue Apr 21 23:24:09 EDT 2020" starttimestamp="1587506529026" timestamp="19320970" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="50" _type="ShellCommand" date="Tue Apr 21 23:24:15 EDT 2020" starttimestamp="1587506529026" timestamp="19326776" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="51" _type="ShellCommand" date="Tue Apr 21 23:24:18 EDT 2020" starttimestamp="1587506529026" timestamp="19329630" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="52" _type="EclipseCommand" commandID="org.eclipse.equinox.p2.ui.sdk.install" date="Tue Apr 21 23:24:18 EDT 2020" starttimestamp="1587506529026" timestamp="19329666" />
+  <Command __id="53" _type="ShellCommand" date="Tue Apr 21 23:24:22 EDT 2020" starttimestamp="1587506529026" timestamp="19333526" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="54" _type="ShellCommand" date="Tue Apr 21 23:24:30 EDT 2020" starttimestamp="1587506529026" timestamp="19341039" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="55" _type="EclipseCommand" commandID="org.eclipse.ui.help.aboutAction" date="Tue Apr 21 23:24:30 EDT 2020" starttimestamp="1587506529026" timestamp="19341074" />
+  <Command __id="56" _type="ShellCommand" date="Tue Apr 21 23:24:30 EDT 2020" starttimestamp="1587506529026" timestamp="19341801" type="ECLIPSE_LOST_FOCUS" />
+  <Command __id="57" _type="ShellCommand" date="Tue Apr 21 23:24:32 EDT 2020" starttimestamp="1587506529026" timestamp="19343950" type="ECLIPSE_GAINED_FOCUS" />
+  <Command __id="58" _type="ShellCommand" date="Tue Apr 21 23:24:43 EDT 2020" starttimestamp="1587506529026" timestamp="19354443" type="ECLIPSE_LOST_FOCUS" />
+</Events>
